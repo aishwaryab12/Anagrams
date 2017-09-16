@@ -245,8 +245,6 @@ public class AnagramDictionary {
             sizeToWords.put(sizeofword,temp);
         }
 
-
-
     }
 
 
