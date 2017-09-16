@@ -142,23 +142,13 @@ public class AnagramDictionary {
         ArrayList<String> temp=new ArrayList<String>();
         ArrayList<String> min=new ArrayList<String>();
 
+        while(true)
+        {
             temp = sizeToWords.get(wordlength);
             String word = temp.get(i);
 
-            if (lettersToWords.containsKey(sorted(word)))
+            if (i > temp.size())
             {
-                min = lettersToWords.get(sorted(word));
-
-                if (min.size() >= MIN_NUM_ANAGRAMS)
-                {
-                    return word;
-                }
-
-                i++;
-
-            }
-
-            if (i > temp.size()) {
                 i = 0;
                 wordlength++;
                 if (wordlength > MAX_WORD_LENGTH) {
@@ -166,7 +156,32 @@ public class AnagramDictionary {
                 }
             }
 
-            return "stop";
+            if (lettersToWords.containsKey(sorted(word)))
+            {
+                min = lettersToWords.get(sorted(word));
+
+                if (min.size() >= MIN_NUM_ANAGRAMS)
+                {
+                    i++;
+                    return word;
+                }
+                else
+                {
+                    i++;
+                    if (i > temp.size())
+                    {
+                        i = 0;
+                        wordlength++;
+                        if (wordlength > MAX_WORD_LENGTH) {
+                            wordlength = DEFAULT_WORD_LENGTH;
+                        }
+                    }
+
+                    continue;
+                }
+            }
+        }
+
     }
 
     public boolean isAnagram(String s1,String s2)
